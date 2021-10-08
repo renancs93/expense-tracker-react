@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import * as C from './App.styles'
 import { Item } from './types/Item'
-import { Category } from './types/Category'
 import { categories } from './data/categories'
 import { items } from './data/items'
 import { getCurrentMonth, filterListByMonth } from './helpers/dateFilter'
 import { TableArea } from './components/TableArea'
 import { InfoArea } from './components/InfoArea'
+import { InputArea } from './components/InputArea'
 
 const App = () =>{
   
@@ -40,6 +40,12 @@ const App = () =>{
     setCurrentMonth(newMonth)
   }
 
+  const handleAddItem = (item: Item)=>{
+    let newList = [...list]
+    newList.push(item);
+    setList(newList);
+  }
+
   return(
     <C.Container>
       <C.Header>
@@ -56,7 +62,7 @@ const App = () =>{
           />
 
           {/* Área de iserção */}
-          
+          <InputArea onAdd={handleAddItem} />
 
           {/* Tabela de itens */}
           <TableArea list={filteredList} />
